@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div>
+        <input type="text" id="getValue" value=''>
+        <div>
+            <p> Local Storage VALUE: <span id="local_val"></span></p>
+            <button id="save_val">Save</button>
+            <button id="delete_val">Delete</button>
+            <button id="read_val">Read_Value</button>
+        </div>
+    </div>
+</body>
+<script>
+    let selec = (val)=>{
+return document.querySelector(val);
+
+    }
+    let save_val = selec("#save_val"); 
+
+   let  delete_val=selec("#delete_val");
+   let input_val=selec("#getValue")
+    let  read_val =  selec("#read_val");
+    let local_val = selec("#local_val")
+    console.log(save_val, delete_val, read_val);
+   save_val.addEventListener("click", ()=>{
+   localStorage.setItem("name", input_val.value);
+   local_val.innerHTML = localStorage.getItem("name")
+   console.log(localStorage.getItem("name"))
+   });
+   local_val.innerHTML = localStorage.getItem("name")
+</script>
+</html>

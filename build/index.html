@@ -13,11 +13,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href>
     </head>
-    <body class=" text-gray-600 dark:text-white dark:bg-black">
-        <div  class="grid md:grid-cols-4 relative">
+    <body class="text-gray-600 dark:text-white">
+        <div class="grid md:grid-cols-4 relative">
 
             <div class="md:col-span-1  md:justify-end pl-4 ">
-                <nav class=" md:fixed">
+                <nav class>
                     <div>
                         <h1
                             class="uppercase hover:text-black text-2xl py-3 px-2"><a
@@ -44,7 +44,7 @@
             <!-- End Navigation -->
 
             <main
-                class="px-16 py-6 bg-gray-200 dark:bg-gray-600   md:col-span-3 min-h-[100vh]">
+                class="px-16 py-6 bg-gray-200 dark:bg-gray-600   md:col-span-3 md:min-h-[100vh dark:text-gray-300 ">
                 <div
                     class="text-secondary-second flex md:justify-end  justify-center font-bold dark:text-white ">
                     <a href="#"
@@ -52,10 +52,14 @@
                     <a href="#"
                         class="md:border-2 border-secondary-second btn hover:bg-secondary-second hover:text-white items-center justify-center transition ease-in-out duration-500">Sign
                         up</a>
-                        <a href="#" id="mode-all" class=" btn  items-center justify-center transition ease-in-out duration-500 mx-2 lowercase text-xl " > <i id="lighticon" class="fa-solid  fa-circle-half-stroke"></i> <span id="light-text">dark</span></a>
+                    <a href="#" id="mode-all"
+                        class=" btn  items-center justify-center transition ease-in-out duration-500 mx-2 lowercase text-xl ">
+                        <i id="lighticon"
+                            class="fa-solid  fa-circle-half-stroke"></i> <span
+                            id="light-text">light</span></a>
                 </div>
 
-                <header>
+                <header >
                     <h2
                         class="text-gray-700 dark:text-gray-300  text-4xl font-semibold">Recipes</h2>
                     <h3 class="text-2xl font-semibold">For Ninjas</h3>
@@ -125,12 +129,12 @@
                     </div>
 
                     <h4
-                        class="font-lightc mt-12 pb-2 border-b mb-3 border-gray-200 ">Most
+                        class="font-lightc mt-12 pb-2 border-b mb-3 border-gray-300 ">Most
                         Popular</h4>
                     <div>
                         <!-- Cards go here -->
                     </div>
-                    <div class="flex justify-center">
+                    <div onclick="setCookie()" class="flex justify-center">
                         <div
                             class="bg-gray-400 btn text-white hover:shadow-inner   hover:border-b-2 border-white transition ease-in-out duration-300">
 
@@ -144,11 +148,13 @@
 
         </div>
         <script>
+
             let menu  = document.querySelector("#menu");
             let links =  document.querySelector("ul");
             let mode  =  document.querySelector("#light-text");
             let all =  document.querySelector("#mode-all");
             let light_icon =  document.querySelector("#lighticon");
+            let modehtml =  document.querySelector("body");
             menu.addEventListener("click", ()=>{
                 if(menu.classList.contains("fa-bars")){
                     menu.classList.replace("fa-bars", "fa-times")
@@ -158,18 +164,35 @@
                 links.classList.toggle("hidden");
             });
             all.addEventListener("click", ()=>{
-                if(mode.textContent === "DARK"){
-                    mode.textContent = "LIGHT";
+          
+                if(modehtml.classList.contains("dark")){
+         
+                    mode.textContent = "light";
+                    localStorage.setItem('mode', 'light')
                     light_icon.classList.replace("fa-solid" ,"fa");
-                    
                     light_icon.classList.replace("fa-circle-half-stroke" ,"fa-lightbulb");
+             
                 }else{
-                    mode.textContent = "DARK";
-                    light_icon.classList.replace( "fa", "fa-solid");
+                    mode.textContent = "dark";
+                    localStorage.setItem('mode', 'dark')
+                    light_icon.classList.replace("fa", "fa-solid");
                     light_icon.classList.replace("fa-lightbulb" ,"fa-circle-half-stroke");
               
                 }
-            })
+                modehtml.classList.toggle("dark");
+         
+            });
+
+            if(localStorage.getItem("mode") == null){
+                localStorage.setItem("mode", "dark")
+   
+                alert(localStorage.getItem("mode"));
+}
+mode.textContent =localStorage.getItem('mode')
+
+modehtml.classList.add(localStorage.getItem("mode"));
+
                     </script>
     </body>
 </html>
+ 
